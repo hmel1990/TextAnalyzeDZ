@@ -35,21 +35,30 @@
 
         static void AnalyzeText(CancellationToken token)
         {
-            try
+            if (File.Exists("E:\\STEP\\SystemProg\\DZ\\TextAnalyzeDZ\\TextAnalyzeDZ\\bin\\Debug\\net9.0\\1.txt"))
             {
-                var sr = new StreamReaderFile("E:\\STEP\\SystemProg\\DZ\\TextAnalyzeDZ\\TextAnalyzeDZ\\bin\\Debug\\net9.0\\1.txt");
-                var text = sr.readText();
+                try
+                {
+                    var sr = new StreamReaderFile("E:\\STEP\\SystemProg\\DZ\\TextAnalyzeDZ\\TextAnalyzeDZ\\bin\\Debug\\net9.0\\1.txt");
+                    var text = sr.readText();
 
-                Task.Run(() => sr.countSentences(text, token));
-                Task.Run(() => sr.countSymbols(text, token));
-                Task.Run(() => sr.countWords(text, token));
-                Task.Run(() => sr.countQuestions(text, token));
-                Task.Run(() => sr.countExclamation(text, token));
+                    Task.Run(() => sr.countSentences(text, token));
+                    Task.Run(() => sr.countSymbols(text, token));
+                    Task.Run(() => sr.countWords(text, token));
+                    Task.Run(() => sr.countQuestions(text, token));
+                    Task.Run(() => sr.countExclamation(text, token));
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Ошибка: {ex.Message}");
+                }
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine($"Ошибка: {ex.Message}");
+                Console.WriteLine("Файл не найден.");
             }
+
+
         }
 
     }
